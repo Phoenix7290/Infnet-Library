@@ -2,13 +2,12 @@
 
 import Image from "next/image";
 import { Button } from "@/components/index";
-import { Footer, Sidebar } from "@/layout";
+import { Footer } from "@/layout";
 import Card from '../components/card';
 
 export default function Home() {
     return (
         <>
-            <Sidebar />
             <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
                 <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
                     <Image
@@ -107,8 +106,8 @@ export default function Home() {
                         onClick={() => alert("Button clicked!")}
                     />
                 </footer>
-                <Card title="Card" />
             </div>
+            <Card title="Card" />
             <Footer />
         </>
     );
