@@ -1,0 +1,185 @@
+// Variables
+$color-primary: #2563eb;
+$color-primary-dark: #1d4ed8;
+$color-secondary: #64748b;
+$color-text: #f8fafc;
+$color-text-muted: #cbd5e1;
+$color-border: rgba(255, 255, 255, 0.1);
+$gradient-blue: linear-gradient(135deg, $color-primary-dark, $color-primary);
+
+// Mixins
+@mixin respond($breakpoint) {
+    @if $breakpoint == tablet {
+        @media (min-width: 768px) { @content; }
+    }
+    @if $breakpoint == desktop {
+        @media (min-width: 1024px) { @content; }
+    }
+}
+
+.footer {
+    background: $gradient-blue;
+    color: $color-text;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: $color-border;
+    }
+
+    &__content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem 2rem;
+    }
+
+    &__main {
+        display: grid;
+        gap: 2.5rem;
+        margin-bottom: 3rem;
+
+        @include respond(tablet) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include respond(desktop) {
+            grid-template-columns: 2fr 1fr 1fr;
+        }
+    }
+
+    &__section {
+        &:not(:last-child) {
+            border-bottom: 1px solid $color-border;
+            padding-bottom: 2rem;
+
+            @include respond(tablet) {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+        }
+    }
+
+    &__title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-bottom: 1.25rem;
+        position: relative;
+        
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -0.5rem;
+            width: 2rem;
+            height: 2px;
+            background: $color-primary;
+            transition: width 0.3s ease;
+        }
+
+        &:hover::after {
+            width: 3rem;
+        }
+    }
+
+    &__description {
+        color: $color-text-muted;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    &__links {
+        list-style: none;
+        padding: 0;
+
+        li {
+            margin-bottom: 0.75rem;
+
+            a {
+                color: $color-text-muted;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                display: inline-block;
+                position: relative;
+
+                &::before {
+                    content: '→';
+                    opacity: 0;
+                    margin-right: 0.5rem;
+                    transform: translateX(-10px);
+                    display: inline-block;
+                    transition: all 0.3s ease;
+                }
+
+                &:hover {
+                    color: $color-text;
+                    transform: translateX(10px);
+
+                    &::before {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+                }
+            }
+        }
+    }
+
+    &__social {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        &-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: $color-text-muted;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+
+            svg {
+                width: 20px;
+                height: 20px;
+                transition: transform 0.3s ease;
+            }
+
+            span {
+                font-size: 0.875rem;
+            }
+
+            &:hover {
+                color: $color-text;
+                background: rgba(255, 255, 255, 0.1);
+
+                svg {
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+
+    &__bottom {
+        padding-top: 2rem;
+        border-top: 1px solid $color-border;
+        text-align: center;
+    }
+
+    &__copyright {
+        color: $color-text-muted;
+        font-size: 0.875rem;
+
+        p {
+            &:first-child {
+                margin-bottom: 0.5rem;
+            }
+        }
+    }
+}
