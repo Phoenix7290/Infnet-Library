@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Button } from "@/components/index";
 import { Footer, Sidebar } from "@/layout";
+import Card from '../components/card';
 
 export default function Home() {
     return (
@@ -106,6 +107,7 @@ export default function Home() {
                         onClick={() => alert("Button clicked!")}
                     />
                 </footer>
+                <Card title="Card" />
             </div>
             <Footer />
         </>
