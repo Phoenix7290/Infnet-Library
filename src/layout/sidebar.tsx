@@ -1,34 +1,37 @@
-"use client";
+"use client"
 
-import React, { useState } from "react";
-import { ChevronDown, ChevronRight, Menu, X } from "lucide-react";
+import React, { useState } from 'react';
+import { ChevronDown, ChevronRight, Menu, X } from 'lucide-react';
+import '@/styles/components/sidebar.scss';
 
-const SideBarCourseItem = ({ courseItemTitle }: { courseItemTitle: string }) => {
+interface SideBarCourseProps {
+    courseTitle: string;
+}
+
+interface SideBarCourseItemProps {
+    courseItemTitle: string;
+}
+
+export const SideBarCourseItem = ({ courseItemTitle }: SideBarCourseItemProps) => {
     const [isCourseItemOpen, setIsCourseItemOpen] = useState(false);
 
     return (
-        <li className="mb-2">
+        <li className="sidebar-course-item">
             <button
-                className="w-full text-left py-2 px-4 rounded-lg transition-all duration-200 hover:bg-gray-700/50 flex items-center justify-between group"
+                className="sidebar-course-item-button"
                 onClick={() => setIsCourseItemOpen(!isCourseItemOpen)}
             >
-                <span className="text-gray-300 group-hover:text-white">
-                    {courseItemTitle}
-                </span>
-                {isCourseItemOpen ? (
-                    <ChevronDown className="w-4 h-4 text-gray-400" />
-                ) : (
-                    <ChevronRight className="w-4 h-4 text-gray-400" />
-                )}
+                <span className="sidebar-course-item-title">{courseItemTitle}</span>
+                {isCourseItemOpen ?
+                    <ChevronDown className="icon" /> :
+                    <ChevronRight className="icon" />
+                }
             </button>
             {isCourseItemOpen && (
-                <ul className="pl-4 mt-2 space-y-1 border-l border-gray-700">
+                <ul className="sidebar-course-item-list">
                     {Array.from({ length: 16 }, (_, i) => (
-                        <li
-                            key={i}
-                            className="py-1 px-4 text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
-                        >
-                            Exercício {String(i + 1).padStart(2, "0")}
+                        <li key={i} className="sidebar-course-item-exercise">
+                            Exercise {String(i + 1).padStart(2, '0')}
                         </li>
                     ))}
                 </ul>
@@ -37,49 +40,85 @@ const SideBarCourseItem = ({ courseItemTitle }: { courseItemTitle: string }) => 
     );
 };
 
-export const SideBar = () => {
+export const SideBarCourse = ({ courseTitle }: SideBarCourseProps) => {
+    const [isCourseOpen, setIsCourseOpen] = useState(false);
+
+    return (
+        <li className="sidebar-course">
+            <button
+                className="sidebar-course-button"
+                onClick={() => setIsCourseOpen(!isCourseOpen)}
+            >
+                <span className="sidebar-course-title">{courseTitle}</span>
+                {isCourseOpen ?
+                    <ChevronDown className="icon" /> :
+                    <ChevronRight className="icon" />
+                }
+            </button>
+            {isCourseOpen && (
+                <ul className="sidebar-course-list">
+                    <SideBarCourseItem courseItemTitle="TP1" />
+                    <SideBarCourseItem courseItemTitle="TP2" />
+                    <SideBarCourseItem courseItemTitle="TP3" />
+                    <SideBarCourseItem courseItemTitle="AT" />
+                </ul>
+            )}
+        </li>
+    );
+};
+
+export default function Sidebar() {
+    const [isFundamentosOpen, setIsFundamentosOpen] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
     return (
         <>
-            {/* Botão para abrir no Mobile */}
+            {/* Mobile menu button */}
             <button
-                className="fixed top-4 left-4 z-50 p-2 rounded-lg bg-gray-800 lg:hidden"
+                className="mobile-menu-button"
                 onClick={() => setIsOpen(!isOpen)}
             >
-                {isOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
+                {isOpen ? <X className="icon" /> : <Menu className="icon" />}
             </button>
 
-            {/* SideBar */}
-            <aside
-                className={`fixed top-0 left-0 h-full bg-gray-900 text-white shadow-xl transition-transform duration-300 z-40
-          ${isOpen ? "translate-x-0" : "-translate-x-full"}
-          lg:translate-x-0 w-64`}
-            >
-                <div className="p-6">
-                    <h2 className="text-xl font-bold mb-6">Lista de TPs e ATs</h2>
-                    <ul className="space-y-2">
-
-                        <SideBarCourseItem courseItemTitle="HTML e CSS" />
-
-                        <SideBarCourseItem courseItemTitle="JavaScript 1" />
-
-                        <SideBarCourseItem courseItemTitle="Interatividade Web" />
-
-                        <SideBarCourseItem courseItemTitle="JavaScript 2" />
-                    </ul>
+            {/* Sidebar */}
+            <div className={`sidebar ${isOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
+                <div className="sidebar-content">
+                    <h2 className="sidebar-title">Lista dos TPs e ATs</h2>
+                    <nav>
+                        <ul className="sidebar-nav">
+                            <li>
+                                <button
+                                    className="sidebar-fundamentos-button"
+                                    onClick={() => setIsFundamentosOpen(!isFundamentosOpen)}
+                                >
+                                    <span className="sidebar-fundamentos-title">Fundamentos</span>
+                                    {isFundamentosOpen ?
+                                        <ChevronDown className="icon" /> :
+                                        <ChevronRight className="icon" />
+                                    }
+                                </button>
+                                {isFundamentosOpen && (
+                                    <ul className="sidebar-fundamentos-list">
+                                        <SideBarCourse courseTitle="JavaScript 1" />
+                                        <SideBarCourse courseTitle="JavaScript 2" />
+                                        <SideBarCourse courseTitle="HTML e CSS" />
+                                        <SideBarCourse courseTitle="Interatividade Web" />
+                                    </ul>
+                                )}
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-            </aside>
+            </div>
 
-            {/* Overlay no Mobile */}
+            {/* Overlay for mobile */}
             {isOpen && (
                 <div
-                    className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+                    className="sidebar-overlay"
                     onClick={() => setIsOpen(false)}
                 />
             )}
         </>
     );
-};
-
-export default SideBar;
+}
