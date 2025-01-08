@@ -2,29 +2,76 @@ import Link from "next/link";
 import fs from "fs";
 import path from "path";
 
-export async function generateStaticParams({ params }: { params: { bloco: string; disciplina: string; dificuldade: string } }) {
-    const questoesDir = path.join(
-        process.cwd(),
-        `data/blocos/${params.bloco}/${params.disciplina}/${params.dificuldade}`
-    );
-    const arquivos = fs.readdirSync(questoesDir);
-    return arquivos.map((file) => ({ questao: file.replace(".md", "") }));
+export async function generateStaticParams() {
+    const blocosDir = path.join(process.cwd(), "src/data/blocos");
+    const blocos = fs.readdirSync(blocosDir);
+
+    const params = [];
+
+    for (const bloco of blocos) {
+        const disciplinasDir = path.join(blocosDir, bloco);
+        const disciplinas = fs.readdirSync(disciplinasDir);
+
+        for (const disciplina of disciplinas) {
+            const categoriasDir = path.join(disciplinasDir, disciplina);
+            const categorias = fs.readdirSync(categoriasDir);
+
+            for (const categoria of categorias) {
+                const questoesDir = path.join(categoriasDir, categoria);
+                const questoes = fs.readdirSync(questoesDir).filter((file) =>
+                    file.endsWith(".md")
+                );
+
+                for (const questao of questoes) {
+                    params.push({
+                        bloco,
+                        disciplina,
+                        categoria,
+                        questao: questao.replace(".md", ""),
+                    });
+                }
+            }
+        }
+    }
+
+    return params;
 }
 
-export default function DificuldadePage({ params }: { params: { bloco: string; disciplina: string; dificuldade: string } }) {
-    const questoes = Array.from({ length: 16 }, (_, i) => i + 1); // Substituir com o gerador real
+export default function CategoriaPage({
+    params,
+}: {
+    params: { bloco: string; disciplina: string; categoria: string };
+}) {
+    const { bloco, disciplina, categoria } = params;
+
+    // Diretório da categoria
+    const questoesDir = path.join(
+        process.cwd(),
+        `src/data/blocos/${bloco}/${disciplina}/${categoria}`
+    );
+
+    // Obtenha todas as questões disponíveis
+    const questoes = fs
+        .readdirSync(questoesDir)
+        .filter((file) => file.endsWith(".md"))
+        .map((file) => file.replace(".md", ""));
 
     return (
         <div>
-            <h1>Dificuldade: {params.dificuldade}</h1>
-            {questoes.map((questao) => (
-                <Link
-                    key={questao}
-                    href={`/blocos/${params.bloco}/${params.disciplina}/${params.dificuldade}/${questao}`}
-                >
-                    <a>Questão {questao}</a>
-                </Link>
-            ))}
+            <h1>
+                {disciplina.toUpperCase()} - {categoria.toUpperCase()}
+            </h1>
+            <ul>
+                {questoes.map((questao) => (
+                    <li key={questao}>
+                        <Link
+                            href={`/blocos/${bloco}/${disciplina}/${categoria}/${questao}`}
+                        >
+                            Questão {questao}
+                        </Link>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const dificuldades = ["tp1", "tp2", "tp3", "at"];
+const categorias = ["TP1", "TP2", "TP3", "AT"];
 
 export default function DisciplinaPage({
     params,
@@ -12,12 +12,12 @@ export default function DisciplinaPage({
     return (
         <div>
             <h1>Disciplina: {disciplina}</h1>
-            {dificuldades.map((dificuldade) => (
+            {categorias.map((categoria) => (
                 <Link
-                    key={dificuldade}
-                    href={`/blocos/${bloco}/${disciplina}/${dificuldade}`}
+                    key={categoria}
+                    href={`/blocos/${bloco}/${disciplina}/${categoria}`}
                 >
-                    <p>{dificuldade}</p>
+                    <p>{categoria}</p>
                 </Link>
             ))}
         </div>

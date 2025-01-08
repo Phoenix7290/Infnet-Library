@@ -5,19 +5,28 @@ import ReactMarkdown from "react-markdown";
 export default function QuestaoPage({
     params,
 }: {
-    params: { bloco: string; disciplina: string; dificuldade: string; questao: string };
+    params: { bloco: string; disciplina: string; categoria: string; questao: string };
 }) {
-    const { bloco, disciplina, dificuldade, questao } = params;
+    const { bloco, disciplina, categoria, questao } = params;
 
+    // Caminho do arquivo Markdown
     const filePath = path.join(
         process.cwd(),
-        `data/blocos/${bloco}/${disciplina}/${dificuldade}/${questao}.md`
+        `src/data/blocos/${bloco}/${disciplina}/${categoria}/${questao}.md`
     );
-    const markdown = fs.readFileSync(filePath, "utf-8");
+
+    // Verifique se o arquivo existe
+    if (!fs.existsSync(filePath)) {
+        return <div>Arquivo não encontrado: {filePath}</div>;
+    }
+
+    // Leia o conteúdo do arquivo Markdown
+    const markdownContent = fs.readFileSync(filePath, "utf-8");
 
     return (
         <div>
-            <ReactMarkdown>{markdown}</ReactMarkdown>
+            <h1>Questão {questao}</h1>
+            <ReactMarkdown>{markdownContent}</ReactMarkdown>
         </div>
     );
 }
