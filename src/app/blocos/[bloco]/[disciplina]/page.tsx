@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const categorias = ["TP1", "TP2", "TP3", "AT"];
+const categorias = ["TP1", "TP2", "TP3", "AT", "Prata", "Ouro"];
 
 export default function DisciplinaPage({
     params,

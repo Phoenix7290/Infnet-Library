@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 const disciplinas: { [key: string]: string[] } = {
-    fundamentos: ["html-css", "js"],
-    "front-end": ["react"],
+    "Fundamentos": ["HTML-CSS", "JS1", "Interatividade-Web", "JS2"],
+    "Front-end": ["Fundamentos-React", "Mobile-First", "Desenvolvimento-React", "Desenvolvimento-Native"],
 };
 
 export default function BlocoPage({ params }: { params: { bloco: string } }) {

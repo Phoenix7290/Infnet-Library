@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const blocos = ["fundamentos", "front-end"];
+const blocos = ["Fundamentos", "Front-End"];
 
 export default function BlocosPage() {
     return (
