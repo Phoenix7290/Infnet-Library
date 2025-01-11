@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
 import "@/styles/components/footer.scss"
 
@@ -21,9 +22,9 @@ const Footer = () => {
                     <div className="footer__section footer__quick-links">
                         <h3 className="footer__title">Links rápidos</h3>
                         <ul className="footer__links">
-                            <li><a href="/courses">Cursos</a></li>
-                            <li><a href="/exercises">Exercícios</a></li>
-                            <li><a href="/resources">Materiais</a></li>
+                            <li><Link href={"/blocos"}>Cursos</Link></li>
+                            <li><Link href={"/blocos"}>Exercícios</Link></li>
+                            <li><Link href={"/"}>Materiais</Link></li>
                         </ul>
                     </div>
 

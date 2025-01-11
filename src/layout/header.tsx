@@ -14,8 +14,8 @@ const Header = ({ Title }: HeaderProps) => {
 
     const menuItems = [
         { title: 'Home', icon: <Home size={18} />, href: '/' },
-        { title: 'Cursos', icon: <BookOpen size={18} />, href: '/courses' },
-        { title: 'Materiais', icon: <Layers size={18} />, href: '/materials' },
+        { title: 'Cursos', icon: <BookOpen size={18} />, href: '/blocos' },
+        { title: 'Materiais', icon: <Layers size={18} />, href: '/blocos' },
     ];
 
     return (

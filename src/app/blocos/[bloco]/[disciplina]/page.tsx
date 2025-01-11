@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const categorias = ["TP1", "TP2", "TP3", "AT", "Prata", "Ouro"];
+const todasCategorias = ["TP1", "TP2", "TP3", "AT", "Prata", "Ouro"];
 
 export default function DisciplinaPage({
     params,
@@ -8,6 +8,11 @@ export default function DisciplinaPage({
     params: { bloco: string; disciplina: string };
 }) {
     const { bloco, disciplina } = params;
+
+    // Filtra as categorias com base no valor do bloco
+    const categorias = bloco === "Front-end"
+        ? todasCategorias.filter(categoria => categoria !== "Prata" && categoria !== "Ouro")
+        : todasCategorias;
 
     return (
         <div>
