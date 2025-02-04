@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link";
 
 const blocos = ["Fundamentos", "Front-End"];
@@ -9,9 +11,9 @@ export default function BlocosPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {blocos.map((bloco) => (
                     <Link key={bloco} href={`/blocos/${bloco}`}>
-                        <a className="block p-6 bg-white shadow-md rounded-lg hover:shadow-lg transition-shadow duration-300">
+                        <div className="block p-6 bg-white shadow-md rounded-lg hover:shadow-lg transition-shadow duration-300">
                             <p className="text-xl font-semibold text-gray-800">{bloco}</p>
-                        </a>
+                        </div>
                     </Link>
                 ))}
             </div>
