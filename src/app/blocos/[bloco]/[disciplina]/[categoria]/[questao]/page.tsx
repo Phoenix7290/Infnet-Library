@@ -8,25 +8,36 @@ export default function QuestaoPage({
     params: { bloco: string; disciplina: string; categoria: string; questao: string };
 }) {
     const { bloco, disciplina, categoria, questao } = params;
-
-    // Caminho do arquivo Markdown
     const filePath = path.join(
         process.cwd(),
         `src/data/blocos/${bloco}/${disciplina}/${categoria}/${questao}.md`
     );
 
-    // Verifique se o arquivo existe
     if (!fs.existsSync(filePath)) {
-        return <div>Arquivo não encontrado: {filePath}</div>;
+        return (
+            <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 p-8">
+                <div className="bg-red-100 dark:bg-red-900 border-l-4 border-red-500 text-red-700 dark:text-red-200 p-4 rounded">
+                    <p className="font-bold">Erro</p>
+                    <p>Arquivo não encontrado: {filePath}</p>
+                </div>
+            </div>
+        );
     }
 
-    // Leia o conteúdo do arquivo Markdown
     const markdownContent = fs.readFileSync(filePath, "utf-8");
 
     return (
-        <div>
-            <h1>Questão {questao}</h1>
-            <ReactMarkdown>{markdownContent}</ReactMarkdown>
+        <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 p-8">
+            <div className="max-w-4xl mx-auto">
+                <h1 className="text-4xl font-bold text-blue-800 dark:text-blue-300 mb-8">
+                    Questão {questao}
+                </h1>
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+                    <article className="prose dark:prose-invert prose-blue max-w-none">
+                        <ReactMarkdown className="text-gray-900 dark:text-gray-100">{markdownContent}</ReactMarkdown>
+                    </article>
+                </div>
+            </div>
         </div>
     );
 }

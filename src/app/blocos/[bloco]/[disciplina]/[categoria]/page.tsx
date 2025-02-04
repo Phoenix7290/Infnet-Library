@@ -43,35 +43,35 @@ export default function CategoriaPage({
     params: { bloco: string; disciplina: string; categoria: string };
 }) {
     const { bloco, disciplina, categoria } = params;
-
-    // Diretório da categoria
     const questoesDir = path.join(
         process.cwd(),
         `src/data/blocos/${bloco}/${disciplina}/${categoria}`
     );
-
-    // Obtenha todas as questões disponíveis
     const questoes = fs
         .readdirSync(questoesDir)
         .filter((file) => file.endsWith(".md"))
         .map((file) => file.replace(".md", ""));
 
     return (
-        <div>
-            <h1>
+        <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 p-8">
+            <h1 className="text-4xl font-bold text-blue-800 dark:text-blue-300 mb-8">
                 {disciplina.toUpperCase()} - {categoria.toUpperCase()}
             </h1>
-            <ul>
-                {questoes.map((questao) => (
-                    <li key={questao}>
-                        <Link
-                            href={`/blocos/${bloco}/${disciplina}/${categoria}/${questao}`}
-                        >
-                            Questão {questao}
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                <ul className="space-y-4">
+                    {questoes.map((questao) => (
+                        <li key={questao} className="transform hover:translate-x-2 transition-transform duration-200">
+                            <Link
+                                href={`/blocos/${bloco}/${disciplina}/${categoria}/${questao}`}
+                                className="flex items-center space-x-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                            >
+                                <span className="text-blue-500 dark:text-blue-400">•</span>
+                                <span className="text-lg">Questão {questao}</span>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 }
