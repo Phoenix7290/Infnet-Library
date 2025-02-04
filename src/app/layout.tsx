@@ -30,7 +30,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="pt-br" data-lt-installed="true">
+        <html lang="pt-br" data-lt-installed="true" cz-shortcut-listen="true">
             <body className={`${inter.variable} antialiased flex`}>
                 {/* <Sidebar /> */}
                 <main className="flex-grow min-h-screen">{children}</main>

@@ -13,10 +13,11 @@ const Footer = () => {
                     <div className="footer__section footer__about">
                         <h3 className="footer__title">Sobre o Infnet Library</h3>
                         <p className="footer__description">
-                            Plataforma na qual os estudantes podem facilmente procurar questões passadas dos diversos cursos da Infnet. De forma a ampliar o ensino e o aprendizado.
+                            Plataforma na qual os estudantes podem facilmente procurar questões passadas dos diversos cursos da Infnet. De forma a ampliar o ensino e o aprendizado. Infnet Library não tem fins comerciais.
                         </p>
-                        <p>Nota: Infnet Library é feito por alunos para alunos, portanto não tem fins comerciais.</p>
-                        <p>Ademais, trata-se de um repositório de questões, portanto não há respostas para cada questão. Ficando encarregado ao aluno de exercer suas habilidades e as aprimorar.</p>
+                        <p className="footer__description">
+                            Ademais, trata-se de um repositório de questões, portanto não há respostas para cada questão. Ficando encarregado ao aluno de exercer suas habilidades e as aprimorar.
+                        </p>
                     </div>
 
                     <div className="footer__section footer__quick-links">
