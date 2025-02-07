@@ -37,12 +37,12 @@ export async function generateStaticParams() {
     return params;
 }
 
-export default function CategoriaPage({
+export default async function CategoriaPage({
     params,
 }: {
     params: { bloco: string; disciplina: string; categoria: string };
 }) {
-    const { bloco, disciplina, categoria } = params;
+    const { bloco, disciplina, categoria } = await params;
     const questoesDir = path.join(
         process.cwd(),
         `src/data/blocos/${bloco}/${disciplina}/${categoria}`

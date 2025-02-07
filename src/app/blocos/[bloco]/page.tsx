@@ -10,8 +10,8 @@ export async function generateStaticParams() {
     return blocos.map((bloco) => ({ bloco }));
 }
 
-export default function BlocoPage({ params }: { params: { bloco: string } }) {
-    const { bloco } = params;
+export default async function BlocoPage({ params }: { params: { bloco: string } }) {
+    const { bloco } = await params;
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 p-8">

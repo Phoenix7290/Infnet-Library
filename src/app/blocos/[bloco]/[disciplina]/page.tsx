@@ -2,12 +2,12 @@ import Link from "next/link";
 
 const todasCategorias = ["TP1", "TP2", "TP3", "AT", "Prata", "Ouro"];
 
-export default function DisciplinaPage({
+export default async function DisciplinaPage({
     params,
 }: {
     params: { bloco: string; disciplina: string };
 }) {
-    const { bloco, disciplina } = params;
+    const { bloco, disciplina } = await params;
     const categorias = bloco === "Front-end"
         ? todasCategorias.filter(categoria => categoria !== "Prata" && categoria !== "Ouro")
         : todasCategorias;

@@ -2,12 +2,12 @@ import fs from "fs";
 import path from "path";
 import ReactMarkdown from "react-markdown";
 
-export default function QuestaoPage({
+export default async function QuestaoPage({
     params,
 }: {
     params: { bloco: string; disciplina: string; categoria: string; questao: string };
 }) {
-    const { bloco, disciplina, categoria, questao } = params;
+    const { bloco, disciplina, categoria, questao } = await params;
     const filePath = path.join(
         process.cwd(),
         `src/data/blocos/${bloco}/${disciplina}/${categoria}/${questao}.md`
