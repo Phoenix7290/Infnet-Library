@@ -21,7 +21,7 @@ export default function Home() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                     <Card
                         // title="Fundamentos de Software"
-                        href="/blocos/Front-End"
+                        href="/blocos/Fundamentos"
                         className="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
                     >
                         <div className="p-6">
@@ -42,7 +42,7 @@ export default function Home() {
 
                     <Card
                         // title="Front End"
-                        href="/blocos/Fundamentos"
+                        href="/blocos/Front-End"
                         className="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
                     >
                         <div className="p-6">
