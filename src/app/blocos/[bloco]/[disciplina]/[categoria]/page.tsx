@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 
 export async function generateStaticParams() {
-    const blocosDir = path.join(process.cwd(), "src/data/blocos");
+    const blocosDir = path.join(process.cwd(), "public/data/blocos");
     const blocos = fs.readdirSync(blocosDir);
 
     const params = [];
@@ -45,7 +45,7 @@ export default async function CategoriaPage({
     const { bloco, disciplina, categoria } = await params;
     const questoesDir = path.join(
         process.cwd(),
-        `src/data/blocos/${bloco}/${disciplina}/${categoria}`
+        `public/data/blocos/${bloco}/${disciplina}/${categoria}`
     );
     const questoes = fs
         .readdirSync(questoesDir)

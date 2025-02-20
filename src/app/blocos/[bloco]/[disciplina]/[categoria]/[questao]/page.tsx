@@ -10,7 +10,7 @@ export default async function QuestaoPage({
     const { bloco, disciplina, categoria, questao } = await params;
     const filePath = path.join(
         process.cwd(),
-        `src/data/blocos/${bloco}/${disciplina}/${categoria}/${questao}.md`
+        `public/data/blocos/${bloco}/${disciplina}/${categoria}/${questao}.md`
     );
 
     if (!fs.existsSync(filePath)) {

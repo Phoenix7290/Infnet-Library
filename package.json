@@ -6,6 +6,7 @@
         "dev": "next dev --turbopack",
         "debug": "cross-env NODE_OPTIONS='--inspect' next dev --turbopack",
         "build": "next build",
+        "build--no-lint": "next build --no-lint",
         "start": "next start",
         "lint": "next lint",
         "test": "jest",
